@@ -6,6 +6,7 @@
 时间：2018年04月13日22:42:12
 """
 
+import nltk
 import jieba
 import jieba.posseg as pseg
 from collections import Counter
@@ -64,6 +65,15 @@ def jieba_others():
     words = pseg.cut("这是一本关于信息检索的书。")  # 词性标注
     for word, flag in words:
         print('{} {}'.format(word, flag))
+
+
+def ngram(par_list, par_n):
+    temp = nltk.ngrams(par_list, par_n)  # n-gram
+    newwords_list = ["".join(item) for item in temp]  # 组合新词
+    cnt = Counter(newwords_list)
+    words = cnt.most_common()
+
+    return words
 
 
 if __name__ == "__main__":
